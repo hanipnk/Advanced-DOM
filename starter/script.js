@@ -33,6 +33,8 @@ document.addEventListener('keydown', function (e) {
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
+/*
+
 // Selecting elements
 console.log(document.documentElement);
 console.log(document.head);
@@ -132,4 +134,108 @@ logo.classList.toggle('c');
 logo.classList.contains('c'); // not includes that I use in the arrays
 
 // Don't use this
-logo.className = 'jonas';
+//logo.className = 'jonas';
+
+*/
+
+// Implementing Smooth Scrolling
+
+const BtnScrollTo = document.querySelector('.btn--scroll-to'); //btn to click
+const section1 = document.querySelector('#section--1'); // where the scroll to
+
+BtnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect(); // coordinating
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('current scroll(X/Y)', window.pageXOffset, window.pageYOffset);
+
+  console.log(
+    'height/width viewport', // only dimensions of tge view port
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+
+  // window.scrollTo(                           // 'window.scrollTo'  --> global function in the window
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,   //current position + current scroll
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+/*
+
+// Types of Events and Event Handlers
+const h1 = document.querySelector('h1');
+
+const alerth1 = function (e) {
+  alert('addEventListener : Great! You are reading the heading!');
+
+  // h1.removeEventListener('mouseenter', alerth1);  // it does not have to be inside the function
+};
+
+h1.addEventListener('mouseenter', alerth1);
+
+setTimeout(() => h1.removeEventListener('mouseenter', alerth1), 3000);
+
+// h1.onmouseenter = function (e) {
+//   // old way because if i want to write multiple events on the same element, this way will just overwrite the function unlike eventListener
+//   alert('onmouseenter: Great! You are reading the heading!');
+// };
+
+*/
+
+/*
+// Event Propagation in Practice
+
+//rgb(255,255,255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget); //  'e.target' ---> where the click first happened? NOT the element which event handler was attached
+  console.log(e.currentTarget === this); // both pointing the same where the event listener was attached to
+
+  // Stop propagation
+  // e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV', e.target, e.currentTarget);
+});
+
+// what if I want events happened in the capturing phase? (rarely used)
+
+// document.querySelector('.nav').addEventListener(
+//   'click',
+//   function (e) {
+//     this.style.backgroundColor = randomColor();
+//     console.log('NAV', e.target, e.currentTarget);
+//   },
+//   true
+// );
+
+// If I want to catch an event in the 'capturing phase' which normally does not catch any event,
+//I can set the thrid parameter ture or false to make it happend in 'capturing phase'
+// if i set 'true' event handler will no longer listen to bubbling events but capturing events
+
+*/

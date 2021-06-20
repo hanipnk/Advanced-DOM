@@ -301,3 +301,39 @@ document.querySelector('.nav').addEventListener('click', function (e) {
 // if i set 'true' event handler will no longer listen to bubbling events but capturing events
 
 */
+
+// DOM Traversing
+
+const h1 = document.querySelector('h1');
+
+// Going downwardws : child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children); // only to see direct children of 'h1' element
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+// Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement); // to see the direct parent of 'h1' element
+
+h1.closest('.header').style.background = 'var(--gradient-secondary)'; // selecting closest parent element that has this class('header')
+
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+// if I'm looking for closest('h1') in h1 element, then it's going to be the element itself
+// 'closest' is like the opposite of 'querySelector' because 'querySelector' finds its child element no matter how far in the DOM tree
+// and 'closest' finds its parent elements na matter how far in the DOM tree
+
+// Going Sideways : siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+// I can only access privious and next sibling in JS
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
+
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
+});

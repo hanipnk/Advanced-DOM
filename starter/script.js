@@ -565,3 +565,19 @@ console.log(h1.parentElement.children);
 });
 
 */
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree Built!', e);
+}); // just HTML and JS needs to be loaded
+
+window.addEventListener('load', function (e) {
+  console.log('page fully loaded', e);
+}); // when complete page is loaded including images and any file, this event gets fired
+
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
+
+// this events get fired before a user is about to leave a page.
